@@ -18,6 +18,10 @@ public class ItemServiceImpl implements  ItemService {
     @Autowired
     private ItemRepository itemRepository;
 
+    public ItemServiceImpl(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
+
     @Override
     public List<Item> getAllItems(){
         return (List<Item>) itemRepository.findAll();
@@ -50,21 +54,23 @@ public class ItemServiceImpl implements  ItemService {
 
     @Override
     public  void updateItem(Integer id , String name, String description , String imageUrl){
+
         Item oldItem = itemRepository.findById(id).orElseThrow(() ->
                 new IllegalStateException("Item not found"));
+
         if(!Objects.equals(oldItem.getName(),name)){
             oldItem.setName(name);
         }
         if(!Objects.equals(oldItem.getImageUrl(),imageUrl)){
-            oldItem.setName(imageUrl);
+            oldItem.setImageUrl(imageUrl);
         }
 
         if(!Objects.equals(oldItem.getDescription(),imageUrl)){
-            oldItem.setName(description);
+            oldItem.setDescription(description);
         }
 
+        itemRepository.save(oldItem);
     }
-
 
 
 }

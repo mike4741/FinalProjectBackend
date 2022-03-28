@@ -14,8 +14,11 @@ import java.util.Optional;
 public class ItemController {
 
     @Autowired
-    private ItemServiceImpl itemService;
+    private final ItemServiceImpl itemService ;
 
+    public ItemController(ItemServiceImpl itemService) {
+        this.itemService = itemService;
+    }
 
     @GetMapping
     public Iterable<Item> getItems(){
@@ -44,7 +47,9 @@ public class ItemController {
                             @RequestParam(required = false) String name ,
                             @RequestParam(required = false) String description ,
                             @RequestParam(required = false) String imageUrl){
-        itemService.updateItem(id, name,description,imageUrl);
+              itemService.updateItem(id,"test","description","imageUrl");
+
     }
+
 
 }

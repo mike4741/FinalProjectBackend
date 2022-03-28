@@ -12,6 +12,10 @@ public class ItemDto {
 
     private  Double price;
 
+    public ItemDto() {
+
+    }
+
     public ItemDto(String name, String description, String imageUrl, Double price) {
         this.name = name;
         this.description = description;
